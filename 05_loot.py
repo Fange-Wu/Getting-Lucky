@@ -1,21 +1,22 @@
 import random
 tokens = ["win", "win", "win", "win","lose"]
 STARTING_BALANCE = 0
-
+upgrade = 0
+win = 8 + upgrade
 balance = STARTING_BALANCE
 
 
 # Testing loop to genereate 20 tokens
-for item in range (0,100) :
+for item in range (0,10) :
     chosen = random.choice(tokens)
 
     # Adjust balance
-    if chosen == "unicorn":
-        balance += 4
-    elif chosen == "donkey":
-        balance -= 1
+    if chosen == "win":
+        balance += win
+        print("You looted and gained ${} \n balance = ${}".format(win, balance))
+ 
     else:
-        balance -= 0.5
+        print("You didn't get anything")
 
     
 print()
