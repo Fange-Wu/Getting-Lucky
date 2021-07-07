@@ -1,46 +1,15 @@
-import random
-def askNum(text):
-    """Retunrs an integer from input using 'text'. Loops until valid input given."""
-    while True:
-        try:
-            return int(input(text))
-        except ValueError:
-            print("Incorrect Input!")
+print("Welcome to the store!")
+price_list = {'apple':3, 'orange':2, 'grapefruit':5, 'bomb':15, 'gun':10}
+print("You can buy:")
+for key in price_list:
+    item = key
+    price = price_list[key]
+    print(item, price)
 
-def calc(a,ops,b):
-    """Returns integer operation result from using : 'a','ops','b'"""
-    if   ops == "+": return a+b
-    elif ops == "-": return a-b
-    elif ops == "*": return a*b
-    elif ops == "/": return a//b   # integer division
-    else: raise ValueError("Unsupported math operation")
-    
-total = 10
-correct = 0
-nums = range(1,11)
-for _ in range(total):
-    ops = random.choice("+-*/")
-    a,b = random.choices(nums,k=2)
-
-    # you only allow integer input - your division therefore is
-    # limited to results that are integers - make sure that this
-    # is the case here by rerolling a,b until they match
-    while ops == "/" and (a%b != 0 or a<=b):
-        a,b = random.choices(nums,k=2)
-
-    # make sure not to go below 0 for -
-    while ops == "-" and a<b:
-        a,b = random.choices(nums,k=2)
-
-    # as a formatted text 
-    result = askNum("What is {} {} {} = ".format(a,ops,b))
-
-    # calculate correct result
-    corr = calc(a,ops,b)
-    if  result == corr:
-        correct += 1
-        print("Correct")
-    else:
-        print("Wrong. Correct solution is: {} {} {} = {}".format(a,ops,b,corr))
-
-print("You have {} out of {} correct.".format(correct,total))
+budget = 20
+while budget > 0:
+    buy = input("What do you want to buy?")
+    price = price_list[buy] #You will get an error if you give it a key it doesn't have
+    budget -= price
+    print("You bought: ", buy)
+    print("It costed: $", price)
