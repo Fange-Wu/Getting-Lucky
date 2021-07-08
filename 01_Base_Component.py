@@ -33,6 +33,36 @@ def valid_checker(userchoice):
             return response
             break
 
+def yes_no(question):
+    valid = False
+    while not valid:
+        response = input(question).lower()
+
+        # If yes program continue
+        if response == "yes" or response == "y":
+            response = "yes"
+            return response
+
+        # If no display instructions
+        elif response == "no" or response == "n":
+            response = "no"
+            return response
+
+        # ask user to enter a valid answer
+        else: 
+            print("Please answer yes / no ")
+
+def instructions() :
+    print("**** How to Play ****")
+    print()
+    print("The rules of the game go here")
+    print()
+    return ""
+
+
+show_instructions = yes_no("Have you played the game before? ")
+if show_instructions == "no":
+    instructions()
 
 rounds_played = 0
 rounds = check_rounds()
@@ -45,10 +75,10 @@ balance = STARTING_BALANCE
 balance = 100
 while end_game == "no":
     
-    # Rounds Heading
     print()
     heading = "Round {} of {}".format(rounds_played + 1, rounds)
     print(heading)
+    
     choice = valid_checker("Please choose Loot, Steal, Job, Shop or XXX to quit ")
 
     if choice == "shop":
@@ -79,6 +109,8 @@ while end_game == "no":
 
             else:
                 print("Please choose something from list")
+        
+
 
     elif choice == "loot":
         chosen = random.choice(tokens)
@@ -90,6 +122,7 @@ while end_game == "no":
         
         else:
             print("You didn't find anything")
+        rounds_played += 1
     
     elif choice == "steal":
         chosen_num = random.randint(1, 100)
@@ -100,6 +133,7 @@ while end_game == "no":
             chosen = "You got caught."
             balance = 0.7 * balance
         print(chosen + "\nYour balance is ${:.2f} " .format(balance))
+        rounds_played += 1
 
     elif choice == "job":
         operation = random.randint(1,3)
@@ -132,10 +166,7 @@ while end_game == "no":
                 balance += 6
             else:
                 print("You got it wrong")
-        
+        rounds_played += 1
         print("balance = ${}".format(balance))
-
-
-    rounds_played += 1
 
 print("Thank you for playing")
