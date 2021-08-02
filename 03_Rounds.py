@@ -1,9 +1,9 @@
 # Functions go here
 def check_rounds():
     while True:
-        response = input("How many rounds: ")
+        response = input("Please choose a whole number of rounds between 10 and 30 ")
 
-        round_error = "Please type either <enter> or an integer that is between 10-30"
+        round_error = "<error> Type a whole number that is between 10-30"
 
         if response != "":
             try:
