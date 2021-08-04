@@ -1,7 +1,7 @@
 import random
 
-def question(text):
-    
+def askNum(text):
+    """Retunrs an integer from input using 'text'. Loops until valid input given."""
     while True:
         try:
             return int(input(text))
@@ -9,22 +9,28 @@ def question(text):
             print("Incorrect Input!")
 
 def calc(a,ops,b):
+    """Returns integer operation result from using : 'a','ops','b'"""
     if   ops == "+": return a+b
     elif ops == "-": return a-b
     elif ops == "*": return a*b
 
+
+balance = 0
 nums = range(1,11)
-for _ in range (0,10):
+for i in range(0,10):
     ops = random.choice("+-*")
-    a,b = random.choices(nums)
+    a,b = random.choices(nums, b=2)
 
 
-    # as a formatted text 
-    result = question("What is {} {} {} = ".format(a,ops,b))
+    result = askNum("What is {} {} {} = ".format(a,ops,b))
 
     # calculate correct result
-    correct = calc(a,ops,b)
-    if  result == correct:
+    answer = calc(a,ops,b)
+    if  result == answer:
+        balance += 8
         print("Correct")
+        print(balance)
     else:
-        print("Wrong. The answer was: {} {} {} = {}".format(a,ops,b,correct))
+        print("Wrong. Correct solution is: {} {} {} = {}".format(a,ops,b,answer))
+        print(balance)
+

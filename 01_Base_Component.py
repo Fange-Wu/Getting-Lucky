@@ -70,16 +70,26 @@ end_game = "no"
 tokens = ["win", "win", "win", "win","lose"]
 STARTING_BALANCE = 0
 upgrade = 0
-win = 8 + upgrade
+win = 10 + upgrade
 balance = STARTING_BALANCE
-balance = 100
+balance = 0
+goal = rounds * 10
 while end_game == "no":
-    
+    if balance >= goal :
+        print("Congratulations! You Won!")
+        break
+    if rounds_played >= rounds:
+        print("You lost you didn't meet the money goal!")
+        break
     print()
     heading = "Round {} of {}".format(rounds_played + 1, rounds)
     print(heading)
-    
+    print("Money Goal: ${}".format(goal))
+    print("Current Balance: ${}".format(balance))
     choice = valid_checker("Please choose Loot, Steal, Job, Shop or XXX to quit ")
+    
+    if choice == "xxx":
+        break
 
     if choice == "shop":
         print("Welcome to the store!")
@@ -88,10 +98,11 @@ while end_game == "no":
             print("1. Increase loot reward by $3 | cost: $10")
             print("2. Increase successful steal chance by 10% | cost: $15")
             print("3. Increase job reward to $10 | cost: $20")
+            print("Type exit to exit the shop")
             price_list = {'loot':10, 'steal':15, 'job':20}
             
 
-            buy = input("What do you want to buy? ")
+            buy = input("What do you want to buy? ").lower()
             if buy == "exit":
                 break
             elif buy in price_list:
@@ -109,8 +120,6 @@ while end_game == "no":
 
             else:
                 print("Please choose something from list")
-        
-
 
     elif choice == "loot":
         chosen = random.choice(tokens)
@@ -128,10 +137,10 @@ while end_game == "no":
         chosen_num = random.randint(1, 100)
         if 1 <= chosen_num <= 50:
             chosen = "You stole money."
-            balance = 1.3 * balance
+            balance = 1.5 * balance
         elif 51 <= chosen_num <= 100 :
             chosen = "You got caught."
-            balance = 0.7 * balance
+            balance = 0.8 * balance
         print(chosen + "\nYour balance is ${:.2f} " .format(balance))
         rounds_played += 1
 
@@ -145,7 +154,7 @@ while end_game == "no":
             answer = num1 + num2
             if question == answer:
                 print("You got it right")
-                balance += 6
+                balance += 8
             else:
                 print("You got it wrong")
 
@@ -154,7 +163,7 @@ while end_game == "no":
             answer = num1 - num2
             if question == answer:
                 print("You got it right")
-                balance += 6
+                balance += 8
             else:
                 print("You got it wrong")
 
@@ -163,7 +172,7 @@ while end_game == "no":
             answer = num1 * num2
             if question == answer:
                 print("You got it right")
-                balance += 6
+                balance += 8
             else:
                 print("You got it wrong")
         rounds_played += 1
