@@ -1,14 +1,16 @@
 
 
-balance = 15
+balance = 5
 print("Welcome to the store!")
 while True:
-    
-    print("1. Increase loot reward by $3 | cost: $10")
-    print("2. Increase successful steal chance by 10% | cost: $15")
-    print("3. Increase job reward to $10 | cost: $20")
+    print("Your current balance ${}".format(balance))
+    print("You can buy:")
     price_list = {'loot':10, 'steal':15, 'job':20}
-    
+    for key in price_list:
+        item = key
+        price = price_list[key]
+        print("{} upgrade | cost: ${}".format(item, price))
+    price_list = {'loot':10, 'steal':15, 'job':20}
 
     buy = input("What do you want to buy? ")
     if buy == "exit":
@@ -19,7 +21,7 @@ while True:
             balance -= price
             print("You bought: ", buy)
             print("It costed: $", price)
-            print("Balance: $", balance)
+  
 
         elif balance < price:
             print("You don't have enough money")
@@ -30,8 +32,3 @@ while True:
         print("Please choose something from list")
     
 
-print("You can buy:")
-for key in price_list:
-        item = key
-        price = price_list[key]
-        print("{} upgrade | cost: ${}".format(item, price))

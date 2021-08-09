@@ -2,7 +2,7 @@ import random
 
 # main routine goes here
 
-STARTING_BALANCE = 100
+STARTING_BALANCE = 75
 
 balance = STARTING_BALANCE
 
@@ -28,7 +28,3 @@ for item in range (0,10) :
     
     print("You got a {}.  Your balance is ${:.2f} " .format(chosen, balance))
     
-print()
-print()
-print("Starting Balance: ${:.2f}" .format(STARTING_BALANCE))
-print("Final Balance: ${:.2f}" .format(balance))

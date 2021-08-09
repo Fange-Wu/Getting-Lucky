@@ -19,7 +19,7 @@ balance = 0
 nums = range(1,11)
 for i in range(0,10):
     ops = random.choice("+-*")
-    a,b = random.choices(nums, b=2)
+    a,b = random.choices(nums, k=2)
 
 
     result = askNum("What is {} {} {} = ".format(a,ops,b))
