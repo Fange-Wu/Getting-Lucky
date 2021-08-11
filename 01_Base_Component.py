@@ -92,6 +92,7 @@ while play:
         choice = valid_checker("Please choose Loot, Steal, Job, Shop or XXX to quit ")
         
         if choice == "xxx":
+            play = False
             break
 
         if choice == "shop":
@@ -115,8 +116,13 @@ while play:
                         balance -= price
                         print("You bought: ", buy)
                         print("It costed: $", price)
+                        if buy == "loot":
+                            loot_up += 2
+                        elif buy == "steal":
+                            steal_up += 2
+                        if buy == "job":
+                            job_up += 2
             
-
                     elif balance < price:
                         print("You don't have enough money")
                         missing = balance - price
@@ -124,7 +130,6 @@ while play:
 
                 else:
                     print("Please choose something from list")
-
         elif choice == "loot":
             chosen = random.choice(tokens)
 
@@ -183,7 +188,8 @@ while play:
             rounds_played += 1
             print("balance = ${}".format(balance))
 
-    again=str(input("Do you want to play again, type yes or no "))
-    if again == "no":
-      play = False
+    if play == True:
+        again= yes_no("Do you want to play again, type yes or no ")
+        if again == "no":
+            play = False
 print("Thank you for playing")
