@@ -59,11 +59,23 @@ def instructions() :
     print()
     return ""
 
+def askNum(text):
+    """Retunrs an integer from input using 'text'. Loops until valid input given."""
+    while True:
+        try:
+            return int(input(text))
+        except ValueError:
+            print("Incorrect Input!")
+
+def calc(a,ops,b):
+    """Returns integer operation result from using : 'a','ops','b'"""
+    if   ops == "+": return a+b
+    elif ops == "-": return a-b
+    elif ops == "*": return a*b
 
 show_instructions = yes_no("Have you played the game before? ")
 if show_instructions == "no":
     instructions()
-
 
 play = True
 while play:
@@ -71,12 +83,14 @@ while play:
     rounds = check_rounds()
     end_game = "no"
     tokens = ["win", "win", "win", "win","lose"]
-    STARTING_BALANCE = 0
+    STARTING_BALANCE = 100
     upgrade = 0
     win = 10 + upgrade
     balance = STARTING_BALANCE
     goal = rounds * 10
     steal_up = 0
+    loot_up = 0
+    job_up = 0
     while balance < goal:
         if balance >= goal :
                 print("Congratulations! You Won!")
@@ -133,10 +147,10 @@ while play:
         elif choice == "loot":
             chosen = random.choice(tokens)
 
-                # Adjust balance
+                
             if chosen == "win":
-                balance += win
-                print("You looted and found ${} \nbalance = ${}".format(win, balance))
+                balance += win + loot_up
+                print("You looted and found ${} \nbalance = ${}".format(win + loot_up, balance))
             
             else:
                 print("You didn't find anything")
@@ -155,38 +169,23 @@ while play:
             rounds_played += 1
     
         elif choice == "job":
-            operation = random.randint(1,3)
-            num1 = random.randint(1,10)
-            num2 = random.randint(1,10)
+            nums = range(1,11)
+            ops = random.choice("+-*")
+            a,b = random.choices(nums, k=2)
 
-            if operation == 1:
-                question = int(input("What is " + str(num1) + "+" + str(num2) + ": "))
-                answer = num1 + num2
-                if question == answer:
-                    print("You got it right")
-                    balance += 8
-                else:
-                    print("You got it wrong")
 
-            elif operation == 2:
-                question = int(input("What is " + str(num1) + "-" + str(num2) + ": "))
-                answer = num1 - num2
-                if question == answer:
-                    print("You got it right")
-                    balance += 8
-                else:
-                    print("You got it wrong")
+            result = askNum("What is {} {} {} = ".format(a,ops,b))
 
-            elif operation == 3:
-                question = int(input("What is " + str(num1) + "x" + str(num2) + ": "))
-                answer = num1 * num2
-                if question == answer:
-                    print("You got it right")
-                    balance += 8
-                else:
-                    print("You got it wrong")
-            rounds_played += 1
-            print("balance = ${}".format(balance))
+            # calculate correct result
+            answer = calc(a,ops,b)
+            if  result == answer:
+                balance += 8 + job_up
+                print("Correct")
+                print(balance)
+            else:
+                print("Wrong. Correct solution is: {} {} {} = {}".format(a,ops,b,answer))
+                rounds += 1
+                print(balance)
 
     if play == True:
         again= yes_no("Do you want to play again, type yes or no ")
