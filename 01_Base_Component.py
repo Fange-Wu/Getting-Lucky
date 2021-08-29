@@ -55,8 +55,21 @@ def yes_no(question):
 def instructions() :
     print("**** How to Play ****")
     print()
-    print("The rules of the game go here")
-    print()
+    print("Choose number of rounds 10-30, objective is to reach the specified money goal based off the rounds you chose.(The money goal = rounds x 10) ")
+    print("Each round you will gets to choose 4 options, Loot, Steal, Job, Shop or XXX. Choosing any options except shop or XXX will pass a round.")
+    print("(E.G. Round 1: User chooses Loot, game now moves on to round 2.)")
+    print("4 Options:")
+    print("Loot: gives you a chance to get a medium amount of money but also a chance to not get any money that round.")
+    print("(Generate random, 80% chance to gain $10 and 20% chance to get nothing that round.)")
+    print("Steal: gives you a chance to get a money but also a chance to lose money that round.")
+    print("(50% chance to lose 30% of current balance or 50% chance to gain 40% of current balance)")
+    print("Job: Nothing to lose but will get a math question like 2+2 to get a small amount of money if answered correctly.")
+    print("($8 if you get question right and if wrong you will gain nothing during that round.)")
+    print("Shop: You can access a shop which displays a menu of upgrades with costs.")
+    print("Loot Upgrade: Increase reward from loot by $3 for $10")
+    print("Steal Upgrade: Increase percentage to get money from steal by 10% for $15")
+    print("Job Upgrade: Increase reward from job by $5 from jobs for $20)")
+    print("When game ends you will gets asked if you want to play the game again.")
     return ""
 
 def askNum(text):
@@ -73,6 +86,8 @@ def calc(a,ops,b):
     elif ops == "-": return a-b
     elif ops == "*": return a*b
 
+print("Welcome to the game Getting Lucky!")
+
 show_instructions = yes_no("Have you played the game before? ")
 if show_instructions == "no":
     instructions()
@@ -83,7 +98,7 @@ while play:
     rounds = check_rounds()
     end_game = "no"
     tokens = ["win", "win", "win", "win","lose"]
-    STARTING_BALANCE = 100
+    STARTING_BALANCE = 0
     upgrade = 0
     win = 10 + upgrade
     balance = STARTING_BALANCE
@@ -92,9 +107,6 @@ while play:
     loot_up = 0
     job_up = 0
     while balance < goal:
-        if balance >= goal :
-                print("Congratulations! You Won!")
-                break
         if rounds_played >= rounds:
                 print("You lost you didn't meet the money goal!")
                 break
@@ -106,13 +118,12 @@ while play:
         choice = valid_checker("Please choose Loot, Steal, Job, Shop or XXX to quit ")
         
         if choice == "xxx":
-            play = False
             break
 
         if choice == "shop":
             print("Welcome to the store!")
             while True:
-                print("Your current balance ${}".format(balance))
+                print("Your current balance ${:.2f}".format(balance))
                 print("You can buy:")
                 price_list = {'loot':10, 'steal':15, 'job':20}
                 for key in price_list:
@@ -131,11 +142,11 @@ while play:
                         print("You bought: ", buy)
                         print("It costed: $", price)
                         if buy == "loot":
-                            loot_up += 2
+                            loot_up += 3
                         elif buy == "steal":
-                            steal_up += 2
+                            steal_up += 10
                         if buy == "job":
-                            job_up += 2
+                            job_up += 5
             
                     elif balance < price:
                         print("You don't have enough money")
@@ -144,13 +155,14 @@ while play:
 
                 else:
                     print("Please choose something from list")
+        
         elif choice == "loot":
             chosen = random.choice(tokens)
 
                 
             if chosen == "win":
                 balance += win + loot_up
-                print("You looted and found ${} \nbalance = ${}".format(win + loot_up, balance))
+                print("You looted and found ${} \nbalance = ${:.2f}".format(win + loot_up, balance))
             
             else:
                 print("You didn't find anything")
@@ -180,13 +192,15 @@ while play:
             answer = calc(a,ops,b)
             if  result == answer:
                 balance += 8 + job_up
+                rounds_played += 1
                 print("Correct")
                 print(balance)
             else:
                 print("Wrong. Correct solution is: {} {} {} = {}".format(a,ops,b,answer))
-                rounds += 1
+                rounds_played += 1
                 print(balance)
-
+    if balance >= goal :
+        print("Congratulations! You Won!")
     if play == True:
         again= yes_no("Do you want to play again, type yes or no ")
         if again == "no":
