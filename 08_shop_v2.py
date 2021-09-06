@@ -23,11 +23,11 @@ while True:
             print("You bought: ", buy)
             print("It costed: $", price)
             if buy == "loot":
-                loot_up += 2
+                loot_up += 3
             elif buy == "steal":
-                steal_up += 2
+                steal_up += 10
             if buy == "job":
-                job_up += 2
+                job_up += 5
   
         elif balance < price:
             print("You don't have enough money")

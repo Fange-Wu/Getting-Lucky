@@ -2,7 +2,7 @@ import random
 
 # main routine goes here
 
-STARTING_BALANCE = 75
+STARTING_BALANCE = 100
 
 balance = STARTING_BALANCE
 
@@ -17,7 +17,7 @@ for item in range (0,10) :
     # user will get unicorn *add 4$ to balance
     if 1 <= chosen_num <= 50 + steal_up :
         chosen = "You stole money"
-        balance = 1.5 * balance
+        balance = 1.4 * balance
     
     # if the random # is between 6 and 46
     # user will get donkey *minus 1$ from balance
