@@ -1,6 +1,7 @@
 import random
 # Functions go here
 def check_rounds():
+    # loop keeps asking the question + error until user inputs a whole number between 10-30
     while True:
         response = input("How many rounds: ")
 
@@ -9,11 +10,11 @@ def check_rounds():
         if response != "":
             try:
                 response = int(response)
-
+                # prints error message when user inputs an number thats not 10-30
                 if response < 10 or response > 30:
                     print(round_error)
                     continue
-            
+            # If user inputs something else e.g. letter or 15.5 prints error as well
             except ValueError:
                 print(round_error)
                 continue
@@ -21,12 +22,16 @@ def check_rounds():
         return response
 
 def valid_checker(userchoice):
+    #function checks for loot, steal, job, shop and xxx inputs
     valid = False
     while not valid:
+        # turns the input into lowercase
         response = input(userchoice).lower()
+        # if the input is not in the 5 options prints error and asks question again
         if response not in ('loot', 'steal', 'job', 'shop', 'xxx'):
             print("")
             print("ERROR Please choose Loot, Steal, Job, Shop or XXX to quit ")
+        # if user chooses an option it prints the choice and returns it
         else:
             print("You chose {}".format(response))
             userchoice == response
@@ -35,15 +40,16 @@ def valid_checker(userchoice):
 
 def yes_no(question):
     valid = False
+    # Function checks for yes and no
     while not valid:
+        #turns input into lowercase
         response = input(question).lower()
-
-        # If yes program continue
+        # If yes returns yes + accepts input
         if response == "yes" or response == "y":
             response = "yes"
             return response
 
-        # If no display instructions
+        # If no returns no + accepts input
         elif response == "no" or response == "n":
             response = "no"
             return response
@@ -72,7 +78,7 @@ def instructions() :
     return ""
 
 def askNum(text):
-    """Retunrs an integer from input using 'text'. Loops until valid input given."""
+    # input returns as an integar using 'text' and loops until valid input given
     while True:
         try:
             return int(input(text))
@@ -80,7 +86,7 @@ def askNum(text):
             print("Incorrect Input!")
 
 def calc(a,ops,b):
-    """Returns integer operation result from using : 'a','ops','b'"""
+    # returns an math equation based on the random operation by using 'a','ops','b'
     if   ops == "+": return a+b
     elif ops == "-": return a-b
     elif ops == "*": return a*b
