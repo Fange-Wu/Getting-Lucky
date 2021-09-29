@@ -3,23 +3,43 @@ import random
 def check_rounds():
     # loop keeps asking the question + error until user inputs a whole number between 10-30
     while True:
-        response = input("How many rounds: ")
 
-        round_error = "Please type either <enter> or an integer that is between 10-30"
+        round_error = "Please type an integer that is between 10-30"
 
-        if response != "":
-            try:
-                response = int(response)
-                # prints error message when user inputs an number thats not 10-30
-                if response < 10 or response > 30:
-                    print(round_error)
-                    continue
-            # If user inputs something else e.g. letter or 15.5 prints error as well
-            except ValueError:
+        try:
+            response = int(input("How many rounds: "))
+            # prints error message when user inputs an number thats not 10-30
+            if response < 10 or response > 30:
                 print(round_error)
                 continue
         
+        # If user inputs something else e.g. letter or 15.5 prints error as well
+        except ValueError:
+            print(round_error)
+            continue
+        
         return response
+
+def num_check(question, low, high):
+    error = "Please enter an whole number between 1 and 10\n"
+
+    valid = False 
+    while not valid:
+        try:
+            # question
+            response = int(input(question))
+
+            # if the amount is too low or too high
+            if low < response <= high:
+                return response
+
+
+            # output an error
+            else:
+                print(error)
+        
+        except ValueError:
+            print(error)
 
 def valid_checker(userchoice):
     #function checks for loot, steal, job, shop and xxx inputs
