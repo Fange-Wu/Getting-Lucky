@@ -20,27 +20,6 @@ def check_rounds():
         
         return response
 
-def num_check(question, low, high):
-    error = "Please enter an whole number between 1 and 10\n"
-
-    valid = False 
-    while not valid:
-        try:
-            # question
-            response = int(input(question))
-
-            # if the amount is too low or too high
-            if low < response <= high:
-                return response
-
-
-            # output an error
-            else:
-                print(error)
-        
-        except ValueError:
-            print(error)
-
 def valid_checker(userchoice):
     #function checks for loot, steal, job, shop and xxx inputs
     valid = False
